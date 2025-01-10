@@ -1,0 +1,40 @@
+.left-panel{
+    box-sizing: border-box;
+}
+.app-nav{
+    list-style-type: none;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: start;
+    padding-inline-start: unset;
+    margin-inline-start: unset;
+    margin-block: unset;
+}
+.app-nav .item{
+    height:40px;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    border: none;
+    padding: 0.5rem;
+}
+.app-nav .item.active{
+    background-color: black;
+}
+.app-nav .item a{
+    text-decoration: none;
+    color: unset;
+    width: 100%; 
+    padding: 5px; 
+}
+.app-nav .item:focus-within{
+    outline: solid #009BEF 2px;
+    outline-offset: 2px;
+}
+.app-nav .item a:focus{
+    outline: none;
+}
