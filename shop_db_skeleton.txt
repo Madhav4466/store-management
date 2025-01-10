@@ -1,0 +1,76 @@
+//https://www.halo-lab.com/blog/dashboard-design-examples
+
+Customers Table:
+customer_id (Primary Key)
+first_name
+last_name
+email
+phone_number
+address
+Products Table:
+product_id (Primary Key)
+product_name
+description
+price
+quantity_available
+Orders Table:
+order_id (Primary Key)
+customer_id (Foreign Key to Customers Table)
+order_date
+total_amount
+Order_Items Table:
+order_item_id (Primary Key)
+order_id (Foreign Key to Orders Table)
+product_id (Foreign Key to Products Table)
+quantity
+unit_price
+Employees Table:
+employee_id (Primary Key)
+first_name
+last_name
+email
+phone_number
+address
+role
+hire_date
+Transactions Table:
+transaction_id (Primary Key)
+order_id (Foreign Key to Orders Table)
+transaction_date
+payment_method
+amount_paid
+Suppliers Table:
+supplier_id (Primary Key)
+supplier_name
+contact_person
+email
+phone_number
+address
+Inventory Table:
+inventory_id (Primary Key)
+product_id (Foreign Key to Products Table)
+supplier_id (Foreign Key to Suppliers Table)
+purchase_date
+purchase_price
+quantity_purchased
+
+Warranties Table:
+warranty_id (Primary Key)
+product_id (Foreign Key to Products Table)
+customer_id (Foreign Key to Customers Table)
+start_date
+end_date
+warranty_description
+Repairs Table:
+repair_id (Primary Key)
+product_id (Foreign Key to Products Table)
+customer_id (Foreign Key to Customers Table)
+repair_date
+repair_description
+repair_cost
+Maintenance Records Table:
+maintenance_id (Primary Key)
+product_id (Foreign Key to Products Table)
+maintenance_date
+maintenance_description
+maintenance_cost
