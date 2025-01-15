@@ -4,26 +4,20 @@
 .app-nav{
     list-style-type: none;
     text-align: left;
-    display: flex;
-    flex-direction: column;
     gap: 10px;
-    align-items: start;
     padding-inline-start: unset;
     margin-inline-start: unset;
     margin-block: unset;
 }
 .app-nav .item{
-    height:40px;
-    width: 100%;
-    border-radius: 5px;
-    display: flex;
+    border-radius: 15px !important;
     box-sizing: border-box;
     align-items: center;
     border: none;
-    padding: 0.5rem;
 }
 .app-nav .item.active{
     background-color: black;
+    color: white !important;
 }
 .app-nav .item a{
     text-decoration: none;
