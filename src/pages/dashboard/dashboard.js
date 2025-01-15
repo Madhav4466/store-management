@@ -1,13 +1,12 @@
 import React from "react";
 import '../../styles/dashboard/dashboard.css';
-import LeftPanel from "../../components/left-panel";
-import MainContent from "../../components/main-content";
+import PrimaryNav from "../../views/components/navigation/primary-nav";
+import DashboardLayout from "../../views/layout/dashboard";
 
 export default function Dashboard(){
     return(
         <>
-            <LeftPanel/>
-            <MainContent/>
+            <DashboardLayout nav={<PrimaryNav/>}/>
         </>
     );
 }
