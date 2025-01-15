@@ -36,13 +36,9 @@ function App() {
   ]);
 
   return (
-    <div className="App">
-      <div className="container-fluid">
-        <div className="row vh-100">
-          <RouterProvider router={router}></RouterProvider>
-          <Outlet/>
-        </div>
-      </div>
+    <div className="App App d-flex flex-column min-vh-100">
+        <RouterProvider router={router}></RouterProvider>
+        <Outlet/>
     </div>
   );
 }
