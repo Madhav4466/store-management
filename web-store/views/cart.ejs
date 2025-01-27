@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+	<title>Confirmation</title>
+	<link rel="stylesheet" href="../TekVision_MyInterview_3-Oct-2018/bootstrap-3.3.7-dist/css/bootstrap.min.css" type="text/css"/>
+	<link rel="stylesheet" href="../TekVision_MyInterview_3-Oct-2018/fontawesome-free-5.3.1-web/fontawesome-free-5.3.1-web/css/all.min.css" type="text/css"/>	
+	<script src="../TekVision_MyInterview_3-Oct-2018/Scripts/jquery-3.3.1.min.js"></script>
+	<script src="../TekVision_MyInterview_3-Oct-2018/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<script src="../TekVision_MyInterview_3-Oct-2018/Scripts/page_validn.js"></script>
+	<style>
+	#order{
+		text-align:left;
+		font-size:1.6em;
+	}
+	</style>
+	<script>
+	$(document).ready(function()
+	{ 
+		var Cart=new Array();
+		Cart=(JSON.parse(localStorage.getItem("Cart")));
+		for (var i = 4; i < Cart.length-2; ++i)
+		{
+			$("#order").append
+			(
+				"<tr>"+
+					"<td>"+Cart[i]+"</td>"+
+					"<td>"+Cart[++i]+"</td>"+
+					"<td>"+Cart[++i]+"</td>"+
+					"<td>"+Cart[++i]+"</td>"+
+				"</tr>"
+			);
+		}
+		$("#order").find("tr:last").css("font-weight","bold");
+		$("#order").find("tr:last").css("font-size","1.2em");
+		$("#order").css("font-family","gabriola");
+		$("#order tr:last").find("td").attr("colspan",3);
+		$("#order tr:last").css("border-top","solid black 1px");
+	});
+	</script>
+</head>
+<body>
+<%@page language="java"%>
+<%@page import="java.io.*,java.util.*"%>
+<%@page import="java.servlet.*"%>
+<%
+         Date d = new Date();
+%>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-success">
+				<div class="panel-heading" style="border-top-left-radius:10px;border-top-right-radius:10px;">
+                    <h3 class="panel-title" >
+                        <center><h3><i class="fa fa">Congrats <%out.println(session.getAttribute("uid"));%>Your order Confirmed Successfully</i></h3></center>
+                    </h3>
+                </div>
+				<div class="panel-body">
+				<h4 class="pull-right"><b>	Order Date:</b><%out.println(new java.util.Date().toString());%></h4>
+					<table id="order"  width="100%">
+						<tr>
+							<th>Item Name</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Total</th>
+						</tr>
+					</table><BR><BR>
+					<button type="button" class="btn btn-success pull-right">Make Payment</button>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
