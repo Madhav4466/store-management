@@ -1,0 +1,138 @@
+<% layout("layouts/dashboard") %>
+<div class="col-md-8 d-flex flex-column justify-content-center">
+    <div class="row">
+        <h1 class="d-flex justify-content-center">New Sale Bill</i></h1>
+    </div>
+    <div class="row mb-2">
+        <form class="newProduct needs-validation" method="post" action="/sale/new" novalidate>
+            <div class="row mb-1 d-flex justify-content-start">
+                <div class="col-md-4">
+                    <label for="invoiceNumber" class="form-label">Invoice Number</label>
+                    <input id="invoiceNumber" type="text" name="invoiceNumber" class="form-control disabled read-only" value="<%= invoices.length ? invoices.length+1 : 0 %>" placeholder="Invoice Number" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label for="salesman" class="form-label">Salesman</label>
+                    <select id="salesman" class="form-select" aria-label="Salesman" name="salesman" required>
+                        <option selected value="<%= currentUser._id %>"><%= currentUser.firstName %> <%= currentUser.lastName %></option>
+                        <% users.forEach(user => { %>
+                            <% if (user._id.toString() !== currentUser._id.toString()) { %>
+                                <option value="<%= user._id %>"><%= user.firstName %> <%= user.lastName %></option>
+                            <% } %>
+                        <% }) %>
+                    </select>
+                    <div class="invalid-feedback">Please Select Salesman</div>
+                    <div class="valid-feedback">Looks Good!</div>
+                </div>
+                <div class="col-md-4">
+                    <label for="invoiceDate" class="form-label">Invoice Date</label>
+                    <input id="invoiceDate" type="date" name="invoiceDate" class="form-control disabled" placeholder="Invoice Date" value="<%= new Date().toISOString().split("T")[0] %>" max="<%= new Date().toISOString().split("T")[0] %>" required>
+                </div>
+            </div>
+            <div class="row mb-1 mt-2 d-flex justify-content-start" id="customerDetails" role="group" aria-label="Customer Details">
+                <div class="col-md-8">
+                    <label for="customerName" class="form-label">Customer Name *</label>
+                    <input id="customerName" type="Text" name="customerName" class="form-control" placeholder="CustomerName" required>
+                    <div class="invalid-feedback">Customer Name cannot be blank</div>
+                    <div class="valid-feedback">Looks Good!</div>
+                </div>
+                <div class="col-md-4">
+                    <label for="mobile" class="form-label">Mobile</label>
+                    <input id="mobile" type="text" name="mobile" class="form-control" placeholder="Mobile" maxlength="10">
+                </div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input id="mobile" type="email" name="email" class="form-control" placeholder="Email">
+                </div>
+                <div class="col-md-6">
+                    <label for="address" class="form-label">Address</label>
+                    <input id="address" type="Text" name="address" class="form-control" placeholder="Address">
+                </div>
+            </div>
+            <div class="row mb-1 d-flex justify-content-start" id="paymentDetails" role="group" aria-label="Payment Details">
+                <div class="col-md-6">
+                    <label for="invoiceType" class="form-label">Payment Status</label>
+                    <select id="invoiceType" class="form-select" aria-label="Invoice Type" name="invoiceType" required>
+                        <option selected disabled>----Select Invoice Type---</option>
+                        <% paymentStatuses.forEach(status => { %>
+                            <option value="<%= status %>"><%= status %></option>
+                        <% }) %>
+                    </select>
+                    <div class="invalid-feedback">Please Select Invoice Type</div>
+                    <div class="valid-feedback">Looks Good!</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="dueDate" class="form-label">Due Date</label>
+                    <input id="dueDate" type="date" name="dueDate" class="form-control" placeholder="Due Date" min=<%= new Date().toISOString().split("T")[0] %> required>
+                    <div class="invalid-feedback">Due Date cannot be blank</div>
+                    <div class="valid-feedback">Looks Good!</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="paymentMode" class="form-label">Payment Method</label>
+                    <select id="paymentMode" class="form-select" aria-label="Payment Mode" name="paymentMode" required>
+                        <option selected disabled>----Select Payment Mode---</option>
+                        <% paymentMethods.forEach(method => { %>
+                            <option value="<%= method %>"><%= method %></option>
+                        <% }) %>
+                    </select>
+                    <div class="invalid-feedback">Please Select Payment Mode</div>
+                    <div class="valid-feedback">Looks Good!</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="balance" class="form-label">Balance</label>
+                    <input id="balance" type="Text" name="balance" class="form-control disabled" placeholder="Balance" readonly>
+                </div>
+            </div>
+            <div class="row mb-1 mt-4 d-flex justify-content-start">
+                <div class="col-md-12">
+                    <label for="selectProduct" class="form-label">Select Product</label>
+                    <select id="selectProduct" class="form-select" aria-label="Select Product" name="selectProduct" required>
+                        <option selected disabled>----Select Product---</option>
+                        <% products.forEach(product => { %>
+                            <option value="<%= product._id %>"><%= product.name %></option>
+                        <% }) %>
+                    </select>
+                    <div class="invalid-feedback">Please Select Product</div>
+                    <div class="valid-feedback">Looks Good!</div>
+                </div>
+            </div>
+            <div class="row mb-1 mt-2 d-flex justify-content-start">
+                <div class="col-md-12 p-3 rounded border">
+                    <table class="table table-hover border m-0 m-auto">
+                        <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Product Name</th>
+                              <th scope="col">Qty</th>
+                              <th scope="col">Price</th>
+                              <th scope="col">GST %</th>
+                              <th scope="col">Discount</th>
+                              <th scope="col">Total</th>
+                              <th scope="col">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row mt-3 d-flex justify-content-end">
+                <div class="col-md-4 d-flex justify-content-center gap-1">
+                    <input type="submit" class="btn btn-primary w-50" value="Save">
+                    <input type="submit" class="btn btn-secondary w-50" value="Save & Exit">
+                    <input type="reset" class="btn btn-info w-50" value="Print">
+                    <input type="reset" class="btn btn-danger w-50" value="Reset">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
