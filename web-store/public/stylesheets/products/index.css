@@ -1,0 +1,33 @@
+.product{
+    border-radius: 10px !important;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.product .product-title h2 a{
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.product button:focus{
+    box-shadow: unset !important;
+}
+.product button:focus-visible{
+    box-shadow: unset !important;
+    outline: solid #009BEF 3px;
+    outline-offset: 2px ;
+}
+.sidebar-menu li {
+    background-color: unset !important;
+    color: white !important;
+    font-weight: bold;
+    border: unset!important;
+}
+
+.sidebar-menu li a {
+    color: white !important;
+    font-weight: bold;
+    padding: 0.3rem !important;
+    border-radius: 10px;
+}
+.sidebar-menu li a:focus-visible {
+    outline: solid white 2px !important;
+    color: white !important;
+}

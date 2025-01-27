@@ -1,0 +1,55 @@
+<%- layout("layouts/accounts") %>
+<div class="col-md-8 d-flex align-items-center">
+    <div class="col-md-4 p-2 m-auto">
+        <div class="login-header row">
+            <h1 class="text-center">Login</h1>
+        </div>
+        <div class="row p-2 align-items-center">
+            <% if(errorMessage) {%> 
+            <div class="col-md-12">
+                <p class="error-message text-danger m-0"><%= errorMessage %></p>
+            </div>
+            <% } %>
+        </div>
+        <div class="login-form row">
+            <form class="login needs-validation" method="POST" action="/login" novalidate>
+                <div class="row p-2">
+                    <label for="email">Email Id</label>
+                    <input type="text" name="email" id="email" class="form-control" placeholder="Email Id" required />
+                    <div class="valid-feedback">Looks Good!</div>
+                    <div class="invalid-feedback">Email cannot be blank</div>
+                </div>
+                <div class="row p-2">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
+                    <div class="valid-feedback">Looks Good!</div>
+                    <div class="invalid-feedback">Password cannot be blank</div>
+                </div>
+                <div class="row p-2 d-flex justify-content-center">
+                    <input type="submit" name="btn_login" class="btn btn-success w-50" value="Login" />
+                </div>
+            </form>
+        </div>
+        <div class="login-footer row d-flex justify-content-between p-2">
+            <div class="col-md-6">
+                <a href="#" class="text-left bold">Forgot Passsword?</a>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+                <a href="/signup" class="text-right">New User?</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-4 d-flex align-items-center" style="background-color: #007C56;">
+    <div class="col-md-6 p-2 m-auto text-white">
+        <div class="row p-2">
+            <h2 class="h1">New Here?</h2>
+        </div>
+        <div class="row p-2">
+            <p>Sign up and start with the E-commerce journey</p>
+        </div>
+        <div class="row p-2">
+            <a href="/signup" class="btn btn-light">New User?</a>
+        </div>
+    </div>
+</div>

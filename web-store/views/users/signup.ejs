@@ -1,0 +1,81 @@
+<%- layout("layouts/accounts") %>
+<div class="col-md-4 d-flex align-items-center" style="background-color: #007C56;">
+    <div class="col-md-6 p-2 m-auto text-white">
+        <div class="row p-2">
+            <h2 class="h1">Already User?</h2>
+        </div>
+        <div class="row p-2">
+            <p>Login to personalize the E-comm app</p>
+        </div>
+        <div class="row p-2">
+            <a href="/login" class="btn btn-light">Login</a>
+        </div>
+    </div>
+</div>
+<div class="col-md-8 d-flex align-items-center">
+    <div class="col-md-6 p-2 m-auto">
+        <div class="login-header row">
+            <h1 class="text-center">Create an Account</h1>
+        </div>
+        <div class="row">
+            <div class="panel panel-danger" style="height:60px; display:none;">
+                <div class="panel-heading"><label>Error At Login</label>
+                    <div class="panel-body">
+                        <p>User Id Cannot Be Empty</p>
+                        <p>Password Must Have Some Values</p>
+                        <p>Type Cannot Be Empty</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="signup-form row">
+            <form class="signup needs-validation" method="post" action="/signup" novalidate>
+                <div class="row p-2">
+                    <div class="col-md-6">
+                        <label for="fname" class="form-label">First Name<i>*</i></label>
+                        <input id="fname" type="text" name="firstName" class="form-control" placeholder="First Name" required>
+                        <div class="valid-feedback">Looks Good!</div>
+                        <div class="invalid-feedback">First Name cannot be blank</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lname" class="form-label">Last Name</label>
+                        <input id="lname" type="text" name="lastName" class="form-control" placeholder="Last Name" required >
+                        <div class="valid-feedback">Looks Good!</div>
+                        <div class="invalid-feedback">Last Name cannot be blank</div>
+                    </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email<i>*</i></label>
+                        <input id="email" type="email" name="email" class="form-control" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  required >
+                        <div class="valid-feedback">Looks Good!</div>
+                        <div class="invalid-feedback">Email cannot be blank</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="mobile" class="form-label">Mobile<i>*</i></label>
+                        <input id="mobile" type="number" name="mobile" class="form-control" placeholder="Mobile" min="1" pattern="[0-9]{10}" onKeyPress="if(this.value.length==10) return false;"required>
+                        <div class="valid-feedback">Looks Good!</div>
+                        <div class="invalid-feedback">Mobile Number cannot be blank</div>
+                    </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col-md-6">
+                        <label for="password" class="form-label">Password<i>*</i></label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
+                        <div class="valid-feedback">Looks Good!</div>
+                        <div class="invalid-feedback">Password cannot be blank</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="confirmPwd" class="form-label">Confirm Password<i>*</i></label>
+                        <input type="password" id="confirmPwd" name="confirmPwd" class="form-control" placeholder="Confirm Password" required />
+                        <div class="valid-feedback">Looks Good!</div>
+                        <div class="invalid-feedback">Confirm Password cannot be blank</div>
+                    </div>
+                </div>
+                <div class="row p-2 d-flex justify-content-center">
+                    <input type="submit" name="btn_login" class="btn btn-success w-50" value="Sign up" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<%- layout("layouts/dashboard") %>
+<div class="col-md-12 d-flex flex-wrap justify-content-center p-2 gap-2">
+    <div class="container-fluid p-2">
+        <div class="row justify-content-between">
+            <h1>Sale Invoices</h1>
+            <div class="col-lg-8 d-flex flex-column">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="type to search">
+                    <label for="floatingInput">Search a Invoice</label>
+                  </div>
+            </div>
+            <div class="col-lg-2 d-flex align-items-center justify-content-end gap-2">
+                <div class="btn-group me-2 product-view-group" role="group" aria-label="Product View">
+                    <button type="button" class="btn btn-outline-success active" aria-selected="true">Grid</button>
+                    <button type="button" class="btn btn-outline-success">List</button>
+                    <button type="button" class="btn btn-outline-success">Tiles</button>
+                  </div>
+                <a href="/sales/new" class="btn btn-success text-center" id="new">+</a>
+            </div>
+        </div>
+        <div class="row justify-content-center rounded border p-2 product-view-container">
+            <%- include("grid-view") %>
+        </div>
+    </div>
+</div>

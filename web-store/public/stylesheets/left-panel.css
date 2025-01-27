@@ -1,0 +1,7 @@
+.left-panel-container {
+  background-color: #007C56 /*#38B98C*/ !important;
+}
+
+.navbar.navbar-expand-lg.fixed-top ul li a {
+  color: #fff !important;
+}

@@ -1,0 +1,39 @@
+@import url("./products/index.css");
+@import url("./left-panel.css");
+
+/* .App.welcome-page {
+    position: relative;
+    background: url("https://img.freepik.com/free-vector/credit-card-payment-concept-landing-page_52683-25953.jpg?t=st=1737791716~exp=1737795316~hmac=20056d236cfd7a62084e148c694095cf2f3763127f35cb1dbf5b5b08fc4f4565&w=1380");
+    /* https://img.freepik.com/free-vector/team-online-store-working-with-customer_1262-19368.jpg?t=st=1737791691~exp=1737795291~hmac=38c550621059f1c921df9116b0bcab670831b79d753ae1e581963c1644f99de2&w=1380 */
+    /* https://img.freepik.com/free-vector/designers-working-internet-store-website_1262-19238.jpg?t=st=1737791697~exp=1737795297~hmac=e3b8e3880b4246b70ee96efd78e24adf841b0dcb69bae1644151f6e5e4259854&w=1380*/     
+    /* background-size: cover;
+    background-position: center;
+    color: white!important
+  }
+  
+  .App.welcome-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adjust the RGBA value to control the transparency */
+    /* z-index: 1;
+  }
+  
+  .App.welcome-page > * {
+    position: relative;
+    z-index: 10000;
+  } */
+
+
+  .App.welcome-page {
+    background: 
+      linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* Adjust the RGBA value to control the transparency */
+      url("https://img.freepik.com/free-vector/credit-card-payment-concept-landing-page_52683-25953.jpg?t=st=1737791716~exp=1737795316~hmac=20056d236cfd7a62084e148c694095cf2f3763127f35cb1dbf5b5b08fc4f4565&w=1380");
+    background-size: cover;
+    background-position: center;
+    color: white!important;
+  }
+  /* https://img.freepik.com/premium-vector/vector-illustration-concept-inventory-control-warehouse-management_675567-3044.jpg?w=1380 */
