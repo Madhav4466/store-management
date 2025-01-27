@@ -1,0 +1,6 @@
+button:focus{
+    box-shadow: none !important;
+    border: none !important;
+    outline: solid #009BEF 2px !important;
+    outline-offset: 2px;
+}
