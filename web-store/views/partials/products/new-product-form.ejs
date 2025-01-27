@@ -1,0 +1,151 @@
+<div class="col-md-12 mb-1 d-flex flex-column justify-content-start">
+    <div class="row mb-4 basic-product-details">
+        <div class="col-md-6">
+            <div class="row mb-2">
+                <label for="name" class="form-label col-md-3">Product Name *</label>
+                <div class="col-md-9">
+                    <input id="name" type="text" name="name" class="form-control" placeholder="Product Name" title="Only Alphabets Allowed" onKeyPress="text_alpha();" required>
+                    <div class="invalid-feedback">Product Name cannot be blank</div>
+                    <div class="valid-feedback">Looks Good!</div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="sku" class="form-label col-md-3">SKU</label>
+                <div class="col-md-9">
+                    <input id="sku" type="text" name="sku" class="form-control" placeholder="SKU" title="Only Alphabets Allowed" onKeyPress="text_alpha();">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="unit" class="form-label col-md-3">Unit *</label>
+                <div class="col-md-9">
+                    <select id="unit" class="form-select" aria-label="Default select example" name="unit">
+                        <option selected disabled>----Select Unit---</option>
+                        <% multiValues.units.forEach(unit => { %>
+                            <option value="<%= unit %>"><%= unit %></option>
+                        <% }) %>
+                        <!-- <option value="Dozen">Dozen</option>
+                        <option value="Box">Box</option>
+                        <option value="Grams">Grams</option>
+                        <option value="Kilograms">Kilograms</option>
+                        <option value="meters">Meters</option>
+                        <option value="Tablets">Tablets</option>
+                        <option value="Units">Units</option>
+                        <option value="Pieces">Pieces</option>
+                        <option value="Pairs">Pairs</option> -->
+                    </select>
+                    <div class="invalid-feedback">Product Name cannot be blank</div>
+                    <div class="valid-feedback">Looks Good!</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            
+        </div>
+    </div>
+    <div class="row mb-2 product-info">
+        <div class="col-md-6">
+            <div class="row mb-2">
+                <label for="dimension" class="form-label col-md-3">Dimension</label>
+                <div class="col-md-9">
+                    <input id="dimension" type="text" name="dimension" class="form-control" placeholder="Dimension" title="Only Alphabets Allowed" onKeyPress="text_alpha();">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="brand" class="form-label col-md-3">Brand</label>
+                <div class="col-md-9">
+                    <input id="brand" type="text" name="brand" class="form-control" placeholder="Brand" title="Only Alphabets Allowed" onKeyPress="text_alpha();">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="color" class="form-label col-md-3">Color</label>
+                <div class="col-md-9">
+                    <input id="color" type="text" name="color" class="form-control" placeholder="Color">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row mb-2">
+                <label for="weight" class="form-label col-md-3">Weight</label>
+                <div class="col-md-9">
+                    <input id="weight" type="text" name="weight" class="form-control" placeholder="Weight" title="Only Alphabets Allowed" onKeyPress="text_alpha();">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="manufacturer" class="form-label col-md-3">Manufacturer</label>
+                <div class="col-md-9">
+                    <input id="manufacturer" type="text" name="manufacturer" class="form-control" placeholder="Manufacturer" title="Only Alphabets Allowed" onKeyPress="text_alpha();">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="category" class="form-label col-md-3">Category</label>
+                <div class="col-md-9">
+                    <select id="category" class="form-select" aria-label="Default select example" name="category">
+                        <option selected disabled>----Choose Category---</option>
+                        <% multiValues.categories.forEach(category => { %>
+                            <option value="<%= category %>"><%= category %></option>
+                        <% }) %>
+                    </select>
+                    <div class="invalid-feedback">Please Select Category</div>
+                    <div class="valid-feedback">Looks Good!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row sale-purchase-info">
+        <div class="col-md-6">
+            <h5>Sale Information</h5>
+            <div class="row mb-2">
+                <label for="salePrice" class="form-label col-md-3">Selling Price *</label>
+                <div class="col-md-9">
+                    <input id="salePrice" type="number" name="salePrice" class="form-control" placeholder="Price" min="1" pattern="[0-9]{10}" onKeyPress="if(this.value.length==10) return false;" required>
+                    <div class="invalid-feedback">Price cannot be blank</div>
+                    <div class="valid-feedback">Looks Good!</div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="saleDescription" class="form-label col-md-3">Sale Description</label>
+                <div class="col-md-9">
+                    <input id="saleDescription" type="text" name="saleDescription" class="form-control" placeholder="Description" title="Only Alphabets Allowed" onKeyPress="text_alpha();">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h5>Purchase Information</h5>
+            <div class="row mb-2">
+                <label for="purchasePrice" class="form-label col-md-3">Purchase Price</label>
+                <div class="col-md-9">
+                    <input id="purchasePrice" type="number" name="purchasePrice" class="form-control" placeholder="Purchase Price" min="1" pattern="[0-9]{10}" onKeyPress="if(this.value.length==10) return false;" required>
+                    <div class="invalid-feedback">Price cannot be blank</div>
+                    <div class="valid-feedback">Looks Good!</div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="purchaseDescription" class="form-label col-md-3">Purchase Description</label>
+                <div class="col-md-9">
+                    <input id="purchaseDescription" type="text" name="purchaseDescription" class="form-control" placeholder="Description" title="Only Alphabets Allowed" onKeyPress="text_alpha();">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4 inventory-management">
+        <h5>Inventory Management</h5>
+        <div class="col-md-6">
+            <div class="row mb-2">
+                <label for="openingStock" class="form-label col-md-3">Opening Stock</label>
+                <div class="col-md-9">
+                    <input id="openingStock" type="number" name="openingStock" class="form-control" placeholder="Opening Stock" title="Only Alphabets Allowed" onKeyPress="text_alpha();">
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-md-4">
+            <div class="row mb-2">
+                <label for="openingStockRPU" class="form-label col-md-3">Opening Stock Rate Per Unit</label>
+                <div class="col-md-9">
+                    <input id="openingStockRPU" type="number" name="openingStockRPU" class="form-control" placeholder="Opening Stock Rate Per Unit" title="Only Alphabets Allowed" onKeyPress="text_alpha();">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

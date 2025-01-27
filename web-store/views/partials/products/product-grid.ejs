@@ -1,0 +1,75 @@
+<div class="col-lg-12 p-2">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover rounded">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" class="text-center align-middle" style="width:50px;">#</th>
+                    <th scope="col" class="text-center align-middle" style="width: 300px;">Name <i class="fa fa-sort"></i></th>
+                    <th scope="col" class="text-center align-middle">Brand</th>
+                    <th scope="col" class="text-center align-middle">Category</th>
+                    <th scope="col" class="text-center align-middle">SKU</th>
+                    <th scope="col" class="text-center align-middle">Weight</th>
+                    <th scope="col" class="text-center align-middle">Unit</th>
+                    <th scope="col" class="text-center align-middle">Sale Price <i class="fa fa-sort"></i></th>
+                    <th scope="col" class="text-center align-middle" style="width: 50px;">Purchase Price <i class="fa fa-sort"></i></th>
+                    <th scope="col" class="text-center align-middle" style="width: 50px;">Quantity <i class="fa fa-sort"></i></th>
+                    <th scope="col" class="text-center align-middle" style="width: 100px;">Added By</th>
+                    <th scope="col" class="text-center align-middle" style="width: 100px;">Update On</th>
+                    <th scope="col" class="text-center align-middle" style="width: 170px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach((product, index) => { %>
+                    <tr>
+                        <td class="align-middle text-center">
+                            <span><%=index + 1%></span>
+                        </td>
+                        <td class="align-middle product-title">
+                            <a href="/products/details/<%=product.id%>"><%=product.name%></a>
+                        </td>
+                        <td class="align-middle text-center product-brand"><%=product.brand%></td>
+                        <td class="align-middle text-center product-category"><%=product.category%></td>
+                        <td class="align-middle sku"><%= product.sku %></td>
+                        <td class="align-middle text-center product-weight"><%=product.weight%></td>
+                        <td class="align-middle text-center product-unit"><%=product.unit%></td>
+                        <td class="align-middle text-center product-price">Rs: <%=product.salePrice%></td>
+                        <td class="align-middle text-center product-price">Rs: <%=product.purchasePrice%></td>
+                        <td class="align-middle text-center opening-stock"><%=product.openingStock%></td>
+                        <td class="align-middle text-center product-added-by"><%= product.addedBy && product.addedBy.firstName && product.addedBy.lastName ? `${product.addedBy.firstName} ${product.addedBy.lastName}` : "Anonymous" %></td>
+                        <td class="align-middle text-center product-updated-on"><%= new Date(product.updatedOn).toLocaleDateString('en-IN') %></td>
+                        <td class="align-middle text-center">
+                            <button type="button" data-product-id="<%= product.id %>" aria-label="View <%= product.name %>" class="btn btn-outline-success text-center view-product" id="new" data-bs-toggle="modal" data-bs-target="#productViewModal"><i class="fa fa-eye"></i></button>
+                            <button type="button" data-product-id="<%= product.id %>" aria-label="Edit <%= product.name %>" class="btn btn-outline-success text-center edit-product" id="new" data-bs-toggle="modal" data-bs-target="#productEditModal"><i class="fa fa-pencil"></i></button>
+                            <button type="button" data-product-id="<%= product.id %>" aria-label="Delete <%= product.name %>" class="btn btn-outline-success text-center delete-product" id="new" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-lg-12 px-2 d-flex justify-content-between">
+    <div class="col-lg-6">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="col-lg-6 text-end">
+        <p>Found <%=products.length %> products</p>
+    </div>
+    
+</div>

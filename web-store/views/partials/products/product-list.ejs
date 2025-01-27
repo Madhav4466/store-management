@@ -1,0 +1,49 @@
+<div class="col-md-12 d-flex flex-column">
+    <% for(let product of products){ %>
+        <div class="product row h-auto p-1">
+            <div class="col-md-3 p-2">
+                <div class="product-image row d-flex w-100 justify-content-between">
+                    <img src="/images/cotton-t-shirt-men-hot-2018-fashion-men-039.jpg" alt="<%=product.category%>'s,<%= product.name%>" height="30%" width="80%">
+                </div>
+            </div>
+            <div class="col-md-6 p-2">
+                <div class="product-title row d-flex w-100 text-break" style="height:60px">
+                    <h2 class="h4" id="item">
+                        <a href="/products/details/<%=product.id%>">
+                            <%=product.name%>
+                        </a>
+                    </h2>
+                </div>
+                <div class="product-title row d-flex w-100 text-break">
+                    <div class="col-lg-12">
+                        <p class="sku" id="price"> <%=product.sku%> | <%= product.unit %> | <%= product.dimension %></p>
+                    </div>
+                    <div class="col-lg-12">
+                        <p class="brand" id="price"><%=product.brand%>| <%= product.manufacturer %></p>
+                    </div>
+                    <div class="col-lg-12">
+                        <p class="category" id="price"><%=product.category%> | Available in <%= product.color %> Color</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 p-2">
+                <div class="product-title row d-flex w-100 text-break">
+                    <div class="col-lg-12">
+                        <h3 id="price" class="w-50 text-wrap h4">Sale Price: Rs: <%=product.salePrice%></h3>
+                    </div> 
+                    <div class="col-lg-12">
+                        <h3 id="price" class="w-50 text-wrap h6 text-body-secondary">Purchase Price: Rs: <%=product.purchasePrice%></h3>
+                    </div> 
+                    <div class="col-lg-12">
+                        <p id="price" class="w-50 text-wrap">Manufacturer <%=product.manufacturer%></p>
+                    </div>
+                    <div class="col-lg-12">
+                        <button type="button" data-product-id="<%= product.id %>" aria-label="View <%= product.name %>" class="btn btn-outline-success text-center view-product" id="new" data-bs-toggle="modal" data-bs-target="#productViewModal"><i class="fa fa-eye"></i></button>
+                        <button type="button" data-product-id="<%= product.id %>" aria-label="Edit <%= product.name %>" class="btn btn-outline-success text-center edit-product" id="new" data-bs-toggle="modal" data-bs-target="#productEditModal"><i class="fa fa-pencil"></i></button>
+                        <button type="button" data-product-id="<%= product.id %>" aria-label="Delete <%= product.name %>" class="btn btn-outline-success text-center delete-product" id="new" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa fa-trash"></i></button>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>

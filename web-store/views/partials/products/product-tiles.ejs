@@ -1,0 +1,41 @@
+<div class="col-md-12 d-flex flex-wrap justify-content-center p-2">
+    <% for(let product of products){ %>
+        <div class="product col-md-3 h-auto p-2 d-flex align-items-center flex-column">
+            <div class="product-image row d-flex w-100">
+                <div class="col-md-12">
+                    <img src="/images/cotton-t-shirt-men-hot-2018-fashion-men-039.jpg" alt="<%=product.category%>'s,<%= product.name%>" height="100%" width="100%">
+                </div>
+            </div>
+            <div class="product-title row d-flex w-100 text-break" style="height:60px">
+                <div class="col-md-12">
+                    <h2 class="text-center h4" id="item"><a href="/products/details/<%=product.id%>">
+                        <%=product.name%>
+                    </a></h2>
+                </div>
+            </div>
+            <div class="product-title row d-flex w-100">
+                <div class="col-md-6">
+                    <p id="price" class="w-50 text-wrap">Sale: Rs: <%=product.salePrice%></p>
+                </div>
+                <div class="col-md-6">
+                    <p id="price" class="w-50 text-wrap">Purchase: Rs: <%=product.salePrice%></p>
+                </div>
+            </div>
+            <div class="product-title row d-flex w-100">
+                <div class="col-md-6">
+                    <p id="price" class="w-50 text-wrap">Brand: <%=product.brand%></p>
+                </div>
+                <div class="col-md-6">
+                    <p id="price" class="w-50 text-wrap">Quantity: <%=product.openingStock%></p>
+                </div>
+            </div>
+            <div class="product-buy row w-100 d-flex justify-content-center">
+                <div class="col-md-12">
+                    <button type="button" data-product-id="<%= product.id %>" aria-label="View <%= product.name %>" class="btn btn-outline-success text-center view-product" id="new" data-bs-toggle="modal" data-bs-target="#productViewModal"><i class="fa fa-eye"></i></button>
+                    <button type="button" data-product-id="<%= product.id %>" aria-label="Edit <%= product.name %>" class="btn btn-outline-success text-center edit-product" id="new" data-bs-toggle="modal" data-bs-target="#productEditModal"><i class="fa fa-pencil"></i></button>
+                    <button type="button" data-product-id="<%= product.id %>" aria-label="Delete <%= product.name %>" class="btn btn-outline-success text-center delete-product" id="new" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa fa-trash"></i></button>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>
