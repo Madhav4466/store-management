@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg fixed-top" data-bs-theme="dark" style="background-color: #007C56; color: white">
+    <div class="container-fluid">
+        <div class="row ms-2">
+            <a class="navbar-brand" href="/dashboard">E-Web Store</a>
+        </div>
+        <div class="row me-2">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" aria-label="Quick Create" title="Quick Create" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-plus"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/products/new">New Inventory</a></li>
+                            <li><a class="dropdown-item" href="/sales/new">New Sale Invoice</a></li>
+                            <li><a class="dropdown-item" href="/purchase/new">New Purchase Invoice</a></li>
+                            <li><a class="dropdown-item" href="/purchase/new">New User</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Notifications" aria-label="Notifications"><i class="fa fa-bell"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Settings" aria-label="Settings"><i class="fa fa-gear"></i></a>
+                    </li>
+                    <% if (!user) { %>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/signup">Register</a>
+                        </li> -->
+                    <% } else { %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="products/" role="button" data-bs-toggle="dropdown" aria-expanded="false"><%= user.name %></a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                            <li><form method="post" action="/logout"><button class="dropdown-item" type="submit">Logout</button></form></li>
+                        </ul>
+                    </li>
+                    <% } %>
+                </ul>
+                <!--form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form-->
+            </div>
+        </div>
+    </div>
+</nav>
