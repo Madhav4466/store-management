@@ -26,7 +26,28 @@ router.get('/new', requireLogin, errorHandler(async (req, res, next)=> {
     const paymentMethods = getEnums(SaleInvoice.schema, 'paymentMethod');
     const invoices = await SaleInvoice.find({});
 
-    res.render("sales/new", { title: "New Invoice", currentUser: currentUser, users: users, products: products, paymentStatuses: paymentStatuses, paymentMethods: paymentMethods, invoices: invoices });
+    let counter = await Counter.findOne({ name: 'invoiceNumber' });
+
+    if (!counter) {
+        // If the counter doesn't exist, create it with seq = 1
+        counter = new Counter({ name: 'invoiceNumber', seq: 1 });
+        await counter.save();  // Save the new counter
+    }
+
+    // Use the current seq directly for the invoice number
+    const invoiceNumber = counter.seq.toString().padStart(8, '0');
+
+    res.render("sales/new", { 
+        title: "New Invoice", 
+        currentUser: currentUser, 
+        users: users, 
+        products: products, 
+        paymentStatuses: paymentStatuses, 
+        paymentMethods: paymentMethods, 
+        invoices: invoices,
+        invoiceNumber: invoiceNumber
+    });
+}));
 }));
 
 module.exports = router;
