@@ -1,10 +1,12 @@
 const express = require('express');
 var router = express.Router();
+const mongoose = require('mongoose');
 const SaleInvoice = require("../../models/invoices/sales");
 const User = require("../../models/users");
 const Product = require("../../models/products");
 const WebErrorHandler = require("../../handlers/errorHandler");
 const { requireLogin, errorHandler } = require('../middlewares/middleware');
+const Counter = require('../../models/counter');
 
 const getEnums = (schema, path) => {
     return schema.path(path).enumValues;
@@ -91,6 +93,23 @@ router.get('/details/:id', requireLogin, errorHandler(async (req, res, next) => 
     if(!invoice) throw new WebErrorHandler("Could not find invoice with id-"+id);
     res.json(invoice);
 }));
+
+router.post('/:id/edit', requireLogin, errorHandler(async (req, res, next) => {
+    const { id } = req.params;
+    const updatedData = req.body;
+    if (updatedData || Object.keys(updatedData).length !== 0) {
+        try {
+            const invoice = await SaleInvoice.findByIdAndUpdate(id, updatedData, { new: true });
+            if (!invoice) {
+                return res.status(404).json({ error: 'Invoice not found' });
+            }
+            return res.json(invoice);
+        } 
+        catch (error) {
+            next(error);
+        }
+    }
+    return res.status(400).json({ error: 'No data provided for update' });
 }));
 
 module.exports = router;
