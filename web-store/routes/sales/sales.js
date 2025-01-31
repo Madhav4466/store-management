@@ -78,6 +78,12 @@ router.post('/', requireLogin, errorHandler(async (req, res, next)=> {
     );
     res.redirect("/sales");
 }));
+
+router.delete('/:id', requireLogin, errorHandler(async (req, res, next) => {
+    const { id } = req.params;
+    const invoice = await SaleInvoice.findByIdAndDelete(id);
+    res.json({message: "Invoice Deleted Successfully!"});
+}));
 }));
 
 module.exports = router;
