@@ -32,8 +32,11 @@ const invoiceSchema = new mongoose.Schema({
         amount: {type: Number}
     }],
     subTotal: { type: Number, required: true },
-    tax: { type: Number },
+    otherCharges: {type: Number},
     totalAmount: { type: Number, required: true },
+    balance: { type: Number },
+    gst: {type: Number},
+    discount: {type: Number},
     paymentStatus: { type: String, required: true, enum: ['pending', 'paid', 'overdue'], default: 'pending' },
     paymentMethod: { type: String, required: true, enum: ['credit card', 'debit card', 'cheque', 'upi', 'cash', 'paypal'], default: 'cash' },
     invoiceDate: { type: Date, default: Date.now },
