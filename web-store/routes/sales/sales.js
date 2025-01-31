@@ -84,6 +84,13 @@ router.delete('/:id', requireLogin, errorHandler(async (req, res, next) => {
     const invoice = await SaleInvoice.findByIdAndDelete(id);
     res.json({message: "Invoice Deleted Successfully!"});
 }));
+
+router.get('/details/:id', requireLogin, errorHandler(async (req, res, next) => {
+    const { id } = req.params;
+    const invoice = await SaleInvoice.findById(id).populate('items.productId').populate('salesPerson');
+    if(!invoice) throw new WebErrorHandler("Could not find invoice with id-"+id);
+    res.json(invoice);
+}));
 }));
 
 module.exports = router;
