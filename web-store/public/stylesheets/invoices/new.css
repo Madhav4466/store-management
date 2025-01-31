@@ -1,0 +1,17 @@
+#product-listbox {
+    border: 1px solid #ddd;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: white;
+  }
+  .list-item {
+    padding: 8px;
+    cursor: pointer;
+  }
+  .list-item:hover {
+    background-color: #f1f1f1;
+  }
