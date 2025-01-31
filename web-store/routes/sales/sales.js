@@ -11,7 +11,7 @@ const getEnums = (schema, path) => {
 };
 
 router.get('/', requireLogin, errorHandler(async (req, res, next)=> {
-    const invoices = await SaleInvoice.find({});
+    const invoices = await SaleInvoice.find({}).populate('items.productId').populate('salesPerson');
     if(!invoices){
         throw new WebErrorHandler("No Sale Invoices Created Yet!", 400);
     }
