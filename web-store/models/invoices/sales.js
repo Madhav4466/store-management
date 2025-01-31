@@ -6,13 +6,13 @@ const invoiceSchema = new mongoose.Schema({
     customer: {
         name: { type: String, required: true },
         email: { type: String },
-        phone: { type: String },
-        address: {
-            street: { type: String },
-            city: { type: String },
-            state: { type: String },
-            zip: { type: String },
-            country: { type: String }
+        mobile: { type: String },
+        address: { type: String
+            // street: { type: String },
+            // city: { type: String },
+            // state: { type: String },
+            // zip: { type: String },
+            // country: { type: String }
         }
     },
     items: [{
