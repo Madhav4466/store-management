@@ -48,6 +48,36 @@ router.get('/new', requireLogin, errorHandler(async (req, res, next)=> {
         invoiceNumber: invoiceNumber
     });
 }));
+
+router.post('/', requireLogin, errorHandler(async (req, res, next)=> {
+    const { salesman, products, totalAmount, balance, subTotal, customerName, email, mobile, address, otherCharges, gst, discount } = req.body;
+    const customerDetails = {name: customerName, email: email, mobile: mobile, address: address}
+    const parsedProducts = JSON.parse(products).map(product => ({
+        productId: new mongoose.Types.ObjectId(product.productId),
+        quantity: product.quantity,
+        salePrice: product.salePrice,
+        amount: product.amount
+    }));
+
+    const newSaleInvoice = new SaleInvoice({
+        invoiceNumber: req.body.invoiceNumber,
+        salesPerson: salesman,
+        items: parsedProducts,
+        totalAmount: parseFloat(totalAmount),
+        subTotal: parseFloat(subTotal),
+        customer: customerDetails,
+        balance: balance,
+        otherCharges: otherCharges,
+        gst: gst,
+        discount: discount
+    });
+    await newSaleInvoice.save();
+    await Counter.findOneAndUpdate(
+        { name: 'invoiceNumber' },
+        { $inc: { seq: 1 } } 
+    );
+    res.redirect("/sales");
+}));
 }));
 
 module.exports = router;
