@@ -23,3 +23,124 @@
         </div>
     </div>
 </div>
+<%- include("./view-invoice") %>
+<%- include("./edit-invoice") %>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <%- include("../components/confirm-dialog") %>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const invoiceViewModalElement = document.querySelector("#invoiceViewModal");
+        const invoiceEditModalElement = document.querySelector("#invoiceEditModal");
+        const deleteConfirmationModal = new bootstrap.Modal(document.querySelector("#deleteModal"))
+        const invoiceViewModal = new bootstrap.Modal(invoiceViewModalElement, {focus: true});
+        const invoiceEditModal = new bootstrap.Modal(invoiceEditModalElement, {focus: true});
+
+        const deleteButtons = document.querySelectorAll(".delete-invoice");
+        const viewInvoiceButtons = document.querySelectorAll('.view-invoice');
+        const editInvoiceButtons = document.querySelectorAll('.edit-invoice');
+        let currentProductId;
+
+        viewInvoiceButtons?.forEach(viewBtn => {
+            viewBtn.addEventListener("click", async function(){
+                const invoiceId = this.getAttribute('data-invoice-id');
+                const response = await fetch(`/sales/details/${invoiceId}`);
+                const invoiceDetails = await response.json();
+                const { name, mobile, address, email } = invoiceDetails.customer;
+                const fields = ['invoiceNumber', 'orderNumber', 'invoiceDate', 'customerName', 'customerAddress', 'customerMobile', 'customerEmail', 'paymentMethod', 'paymentStatus', 'balance', 'subTotal', 'otherCharges', 'totalAmount', 'gst', 'discount'];
+                const itemFields = ['productName', 'salePrice', 'quantity', 'amount'];
+                const {items} = invoiceDetails;
+                fields.forEach(field => {
+                    if(field === "customerMobile") {
+                        invoiceViewModalElement.querySelector(`.${field}`).innerHTML = "Mob: "+ mobile;
+                        return;
+                    }
+                    else if(field === "customerName") {
+                        invoiceViewModalElement.querySelector(`.${field}`).innerHTML = name;
+                        return;
+                    }
+                    else if(field === "customerAddress") {
+                        invoiceViewModalElement.querySelector(`.${field}`).innerHTML = "Address: "+address;
+                        return;
+                    }
+                    else if(field === "customerEmail") {
+                        invoiceViewModalElement.querySelector(`.${field}`).innerHTML = "Email: "+ email;
+                        return;
+                    }
+                    else if(field === "orderNumber") {
+                        invoiceViewModalElement.querySelector(`.${field}`).innerHTML = invoiceDetails.invoiceNumber;
+                        return;
+                    }
+                    else{
+                        invoiceViewModalElement.querySelector(`.${field}`).innerHTML = invoiceDetails[field];
+                    }
+                });
+                items.forEach((item, index) => {
+                    const row = document.createElement("tr");
+                    const td = document.createElement('td');
+                    row.innerHTML = `
+                        <td class="text-center align-middle">${index + 1}</td>
+                        <td class="text-center align-middle">${item.productId.name}</td>
+                        <td class="text-center align-middle">${item.salePrice}</td>
+                        <td class="text-center align-middle">${item.quantity}</td>
+                        <td class='text-end align-middle'>${item.quantity * item.salePrice}</td>
+                    `;
+                    invoiceViewModalElement.querySelector(".items-table tbody").appendChild(row);
+                });
+                currentProductId = invoiceId;
+                invoiceViewModal.show();
+            });
+        });
+
+        editInvoiceButtons.forEach(editBtn =>{
+            editBtn.addEventListener("click", async function(){
+                const invoiceId = this.getAttribute('data-invoice-id');
+                const response = await fetch(`/sales/details/${invoiceId}`);
+                const invoiceDetails = await response.json();
+                const { name, mobile, address, email } = invoiceDetails.customer;
+                const fields = ['invoiceNumber', 'invoiceDate', 'balance', 'subTotal', 'otherCharges', 'totalAmount', 'gst', 'discount', 'subTotalText', 'totalAmountText', /*'dueDate'*/];
+                const customerFields = ['customerName', 'address', 'mobile', 'email'];
+                const {items} = invoiceDetails;
+                fields.forEach(field => {
+                    if(field === "subTotalText") invoiceEditModalElement.querySelector(`.${field}`).innerHTML = invoiceDetails['subTotal'];
+                    else if(field === "totalAmountText") invoiceEditModalElement.querySelector(`.${field}`).innerHTML = invoiceDetails['totalAmount'];
+                    else if(field === "invoiceDate") invoiceEditModalElement.querySelector(`#${field}`).value = new Date(invoiceDetails['invoiceDate']).toISOString().split("T")[0];
+                    //else if(field === "dueDate") invoiceEditModalElement.querySelector(`#${field}`).value = new Date(invoiceDetails['dueDate']).toISOString().split("T")[0];
+                    else invoiceEditModalElement.querySelector(`#${field}`).value = invoiceDetails[field];
+                });
+                customerFields.forEach(field =>{
+                    if(field === "customerName") invoiceEditModalElement.querySelector(`#${field}`).value = invoiceDetails.customer['name'];
+                    else invoiceEditModalElement.querySelector(`#${field}`).value = invoiceDetails.customer[field];
+                })
+                items.forEach((item, index) => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td class="text-center align-middle">${index + 1}</td>
+                        <td class="text-center align-middle">${item.productId.name}</td>
+                        <td class="text-center align-middle">${item.quantity}</td>
+                        <td class="text-center align-middle">${item.salePrice}</td>
+                        <td class='text-center align-middle'>${item.quantity * item.salePrice}</td>
+                    `;
+                    invoiceEditModalElement.querySelector(".items-table tbody").appendChild(row);
+                });
+                currentProductId = invoiceId;
+                invoiceEditModal.show();
+            });
+        });
+
+        deleteButtons?.forEach((dltButton) => {
+            dltButton.addEventListener("click", function(){
+                currentProductId = this.getAttribute("data-invoice-id");
+                deleteConfirmationModal.show();
+            });
+        });
+        document.querySelector("#confirmDelete").addEventListener("click", async function() {
+            const response = await fetch(`/sales/${currentProductId}`, {
+                method: "DELETE"
+            });
+            const result = await response.json();
+            deleteConfirmationModal.hide();
+            location.reload();
+        });
+    });
+</script>
