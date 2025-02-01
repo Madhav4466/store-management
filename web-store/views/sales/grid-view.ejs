@@ -3,29 +3,32 @@
         <table class="table table-bordered table-hover rounded">
             <thead class="thead-light">
                 <tr>
-                    <th scope="col" class="text-center align-middle" style="width:50px;">#</th>
-                    <th scope="col" class="text-center align-middle" style="width: 300px;">Invoice No <i class="fa fa-sort"></i></th>
+                    <th scope="col" class="text-center align-middle">#</th>
+                    <th scope="col" class="text-center align-middle">Invoice No <i class="fa fa-sort"></i></th>
+                    <th scope="col" class="text-center align-middle">Invoice Date</th>
                     <th scope="col" class="text-center align-middle">Customer Name</th>
                     <th scope="col" class="text-center align-middle">Total Amount <i class="fa fa-sort"></i></th>
-                    <th scope="col" class="text-center align-middle" style="width: 100px;">Invoice Date</th>
-                    <th scope="col" class="text-center align-middle" style="width: 50px;">Payment Status<i class="fa fa-sort"></i></th>
-                    <th scope="col" class="text-center align-middle" style="width: 50px;">Payment Method<i class="fa fa-sort"></i></th>
-                    <th scope="col" class="text-center align-middle" style="width: 100px;">Sales Person</th>
-                    <th scope="col" class="text-center align-middle" style="width: 170px;">Actions</th> 
+                    <th scope="col" class="text-center align-middle">Balance<i class="fa fa-sort"></i></th>
+                    <th scope="col" class="text-center align-middle">Payment Status<i class="fa fa-sort"></i></th>
+                    <th scope="col" class="text-center align-middle">Payment Method<i class="fa fa-sort"></i></th>
+                    <th scope="col" class="text-center align-middle">Sales Person</th>
+                    <th scope="col" class="text-center align-middle">Actions</th> 
                 </tr>
             </thead>
             <tbody>
                 <% invoices.forEach((invoice, id) =>{ %>
-                    let date = new Date(invoice.invoiceDate);
-                    let formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+                    <% let date = new Date(invoice.invoiceDate); %>
+                    <% let formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;%>
                     <tr>
-                        <td><%= invoice.invoiceNumber %></td>
-                        <td><%= invoice.customer.name %></td>
-                        <td><%= invoice.totalAmount %></td>
-                        <td><%= date %></td>
-                        <td><%= invoice.paymentStatus %></td>
-                        <td><%= invoice.paymentMethod %></td>
-                        <td><%= invoice.salesPerson %></td>
+                        <td class="text-center align-middle"><%= id + 1 %></td>
+                        <td class="text-center align-middle"><a href="sales/<%= invoice._id %>"><%= invoice.invoiceNumber %></a></td>
+                        <td class="text-center align-middle"><%= formattedDate %></td>
+                        <td class="text-center align-middle"><%= invoice.customer.name %></td>
+                        <td class="text-center align-middle"><%= invoice.totalAmount %></td>
+                        <td class="text-center align-middle"><%= invoice.balance %></td>
+                        <td class="text-center align-middle"><%= invoice.paymentStatus %></td>
+                        <td class="text-center align-middle"><%= invoice.paymentMethod %></td>
+                        <td class="text-center align-middle"><%= `${invoice.salesPerson.firstName} ${invoice.salesPerson.lastName} `%></td>
                         <td>
                             <button type="button" data-invoice-id="<%= invoice.id %>" aria-label="View <%= invoice.invoiceNumber %>" class="btn btn-outline-success text-center view-invoice" id="new" data-bs-toggle="modal" data-bs-target="#invoiceViewModal"><i class="fa fa-eye"></i></button>
                             <button type="button" data-invoice-id="<%= invoice.id %>" aria-label="Edit <%= invoice.invoiceNumber %>" class="btn btn-outline-success text-center edit-invoice" id="new" data-bs-toggle="modal" data-bs-target="#invoiceEditModal"><i class="fa fa-pencil"></i></button>
@@ -58,7 +61,7 @@
         </nav>
     </div>
     <div class="col-lg-6 text-end">
-        <p>Found  products</p>
+        <p>Total <%= invoices.length %> Sale Invoices</p>
     </div>
     
 </div>
